@@ -1,0 +1,20 @@
+extends: default
+
+rules:
+  braces:
+    max-spaces-inside: 1
+    level: warning
+  brackets:
+    max-spaces-inside: 1
+    level: warning
+  commas: disable
+  colons: 
+    max-spaces-before: 10
+    max-spaces-after: 10
+  empty-lines: disable
+  new-line-at-end-of-file: disable
+  new-lines: disable    
+  line-length: disable
+  indentation: disable
+  trailing-spaces: disable
+  truthy: disable
