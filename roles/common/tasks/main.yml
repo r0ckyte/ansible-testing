@@ -11,9 +11,8 @@
   file: path={{etcd_default}} state=directory group=abc owner=abc recurse=true
 
 
-#- name: group vars from dev/group_vars/file
-#etcd_data_path - defined in global group_vars/all
-#  command: echo "{{ dev_groupvar_file }}" 
+- name: group vars from dev/group_vars/file
+  command: echo "{{ dev_groupvar_file }}" 
 
 - name: configure etc init scripts
   template: src=default_scripts/etcd.j2
