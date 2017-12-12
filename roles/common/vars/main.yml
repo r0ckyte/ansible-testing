@@ -1,0 +1,3 @@
+---
+etcd_data_path: /var/data/etcd
+

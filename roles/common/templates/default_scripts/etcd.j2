@@ -1,0 +1,23 @@
+{% macro initial() -%}
+{% for host in groups['etcd_master'] -%}
+   {% if loop.last -%}
+{{hostvars[host].inventory_hostname_short}}=http://{{hostvars[host].inventory_hostname}}:7001
+   {%- else -%}
+{{hostvars[host].inventory_hostname_short}}=http://{{hostvars[host].inventory_hostname}}:7001,
+   {%- endif -%}
+{% endfor -%}
+{% endmacro -%}
+
+
+{% macro cls_state() -%}
+    {% if addn_flag == "true" -%}
+existing
+    {%- else -%}
+new
+    {%- endif -%}
+{% endmacro -%}
+
+OPTS="--name {{ inventory_hostname_short }}" \
+     --initial-state {{cls_state()}} \
+"
+

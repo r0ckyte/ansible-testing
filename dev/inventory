@@ -1,0 +1,10 @@
+[yarn]
+cscqt-dev.localhost.com install=false
+
+[filesrv]
+cscqt-dev.localhost.com
+
+[etcd_master]
+cscqt02-dev.localhost.com addn_flag=false install=false
+
+
