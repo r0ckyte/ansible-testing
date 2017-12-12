@@ -1,0 +1,21 @@
+---
+- name: create user
+  user: name=abc
+
+- name: create data directory
+#etcd_data_path - defined in roles/common/vars/main.yml
+  file: path={{etcd_data_path}} state=directory group=abc owner=abc recurse=true
+
+- name: create default directory
+#etcd_data_path - defined in global group_vars/all
+  file: path={{etcd_default}} state=directory group=abc owner=abc recurse=true
+
+
+#- name: group vars from dev/group_vars/file
+#etcd_data_path - defined in global group_vars/all
+#  command: echo "{{ dev_groupvar_file }}" 
+
+- name: configure etc init scripts
+  template: src=default_scripts/etcd.j2
+    dest=/etc/default/etcd mode=0644
+
