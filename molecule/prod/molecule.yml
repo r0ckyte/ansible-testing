@@ -24,13 +24,13 @@ provisioner:
     vvv: True
   inventory:
     links:
-      group_vars: ../../../qa/group_vars
+      group_vars: ../../../prod/group_vars
   env:
     ANSIBLE_ROLES_PATH: ../../roles
   lint:
     name: ansible-lint
 scenario:
-  name: qa
+  name: prod
 verifier:
   name: testinfra
   lint:

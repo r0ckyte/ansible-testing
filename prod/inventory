@@ -1,0 +1,5 @@
+[yarn]
+cscqt-qa.localhost.com addn_flag=false install=false
+
+[filesrv]
+cscqt-qa.localhost.com

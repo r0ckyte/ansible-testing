@@ -1,0 +1,32 @@
+---
+- name: Prepare
+  hosts: all
+  become: True
+  gather_facts: False
+  tasks:
+    - name: Install python for Ansible
+      raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+      changed_when: False
+
+#mustang-gui needs user svc_qos_gui and bdqos_gui
+    - name: Add bdqos_gui group
+      group: name="bdqos_gui" 
+
+#redquired for etcd-client role
+    - name: Add bdplatform group
+      group: name="bdplatform" 
+
+#creaed /etc/sssd for sssd-mustang role
+    - name: Create /etc/sssd directory
+      file: name=/etc/sssd state=directory 
+      
+    - name: Add svc_qos_gui 
+      user: name="svc_qos_gui" groups="bdqos_gui"
+
+#docker url repo added while instance is created
+    - name: add docker repo url 
+      raw: (echo "deb https://repo.build.quantium.com.au/artifactory/docker-remote-new ubuntu-trusty main" > /etc/apt/sources.list.d/docker.list)
+
+#backdating repo time so that cache_valid_time=86400 condition is satisfied
+    - name: backdate cache update time
+      raw: (touch -d "$(date -R -r /var/cache/apt) - 24 hours" /var/cache/apt)
