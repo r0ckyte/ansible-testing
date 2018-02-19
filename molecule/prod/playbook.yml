@@ -3,3 +3,9 @@
   become: yes
   roles:
     - common
+- hosts: instance-1
+    - somerole
+- hosts: instance-2
+    - somerole2
+    
+ 
